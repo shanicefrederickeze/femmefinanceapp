@@ -87,9 +87,12 @@ Track your financial progress and set your financial goals. Stay motivated by me
 goal_value = st.slider("Set Your Investment Goal (€)", min_value=1000, max_value=10000, value=5000)
 progress = (current_portfolio_value / goal_value) * 100
 
+# Make sure progress doesn't exceed 100
+progress = min(progress, 100)
+
 # Display Progress Bar
 st.write(f"Your current progress towards your goal: {progress:.2f}%")
-st.progress(progress)
+st.progress(progress / 100)  # Pass the value as a float between 0.0 and 1.0
 
 # Market News Section
 st.write("### Market News")
