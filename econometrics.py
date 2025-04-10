@@ -90,10 +90,10 @@ Stay informed with the latest market trends. Here's a glimpse of what's happenin
 """)
 # Example market news (static data for now)
 market_news = [
-    "Stock Market Hits Record Highs Amid Economic Recovery.",
-    "Women Investors Outperform Male Counterparts in Long-Term Investments.",
-    "Cryptocurrency: A Growing Trend Among Millennial Investors.",
-    "Sustainable Investments: How Women are Leading the Green Revolution."
+    "Dow tumbles 10000 points, wiping out a chunk of Wednesday's historic rally: Live Updates",
+    "Stocks Plunge as US-China Trade Tensions Deepen",
+    "European stocks close 3.5% lower as Trump tariffs take effect,China and EU retaliate",
+    "NASDAQ Soars to Best Day Since 2001 After Trumo Pauses Some Tariffs"
 ]
 
 for news_item in market_news:
