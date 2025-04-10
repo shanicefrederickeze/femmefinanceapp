@@ -116,4 +116,4 @@ st.write("### Empowering Women to Take Control of Their Financial Future")
 import streamlit as st
 
 # Display an image from a URL
-st.image("https://www.istockphoto.com/photo/online-investment-winner-rich-woman-and-money-earning-gm1369340285-439118338", caption="Image from URL", use_column_width=True)
+st.image("https://www.istockphoto.com/photo/online-investment-winner-rich-woman-and-money-earning-gm1369340285-439118338", caption="Image from URL",  use_container_width =True)
