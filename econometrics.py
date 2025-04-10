@@ -113,28 +113,3 @@ st.write("""
 
 # Footer
 st.write("### Empowering Women to Take Control of Their Financial Future")
-
-# Chart: Savings Progress Over Time
-st.write("### Savings Progress Chart")
-
-# Generate Random Savings Data (for demo purposes)
-months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-random_savings = [savings + (i * 50) for i in range(12)]  # Increment savings by €50 each month for demo
-
-# Create DataFrame
-df = pd.DataFrame({"Month": months, "Savings (€)": random_savings})
-
-# Plot the savings
-fig, ax = plt.subplots()
-ax.plot(df["Month"], df["Savings (€)"], marker='o')
-ax.set_title("Savings Progress Over Time")
-ax.set_xlabel("Month")
-ax.set_ylabel("Savings (€)")
-plt.xticks(rotation=45)
-st.pyplot(fig)
-
-# Contact Section for Users to Reach Out
-st.write("### Contact Femme Finance")
-st.write("Have any questions? Reach out to us via email at femmefinance@yourdomain.com.")
-
-# Customize as Needed for More Features
