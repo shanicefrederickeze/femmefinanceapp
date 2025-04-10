@@ -1,31 +1,126 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
-# Title and Introduction
+# Custom CSS for styling the app (Pink background and white text)
+st.markdown("""
+    <style>
+    body {
+        background-color: #FFCCE5;
+        color: white;
+    }
+    h1, h2, h3 {
+        color: white;
+    }
+    .stButton>button {
+        background-color: #FF77B9;
+        color: white;
+        font-weight: bold;
+    }
+    .stSlider>div>div>input {
+        background-color: #FF77B9;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Title and Header
 st.title("Femme Finance")
-st.header("Empowering Women to Take Charge of Their Finances")
+st.header("The Future of Finance is Female")
+
+# Portfolio Data (Simulated)
+portfolio_data = {
+    "Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "Portfolio Value (€)": [1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200],
+}
+
+df_portfolio = pd.DataFrame(portfolio_data)
+
+# Plot Portfolio Progress
+st.write("### Portfolio Progress")
+fig, ax = plt.subplots()
+ax.plot(df_portfolio["Month"], df_portfolio["Portfolio Value (€)"], marker='o', color='white')
+ax.set_title("Portfolio Growth Over Time", fontsize=14, color='white')
+ax.set_xlabel("Month", fontsize=12, color='white')
+ax.set_ylabel("Portfolio Value (€)", fontsize=12, color='white')
+ax.tick_params(axis='x', labelcolor='white')
+ax.tick_params(axis='y', labelcolor='white')
+st.pyplot(fig)
+
+# Portfolio Amount Display
+current_portfolio_value = df_portfolio["Portfolio Value (€)"].iloc[-1]
+st.subheader(f"Current Portfolio Value: €{current_portfolio_value}")
+
+# Investment Simulations Section
+st.write("### Investment Simulations")
 st.write("""
-This app helps you track your savings, understand your financial habits, and plan for a brighter future.
-Let's start by calculating your monthly savings!
+Simulate different investment strategies and see how they could impact your portfolio. Use sliders to adjust your risk level and monthly contributions.
 """)
 
-# Input Fields for Financial Information
-income = st.number_input("Monthly Income (€)", min_value=0, step=100)
-expenses = st.number_input("Monthly Expenses (€)", min_value=0, step=100)
+# Investment Risk and Monthly Contributions
+risk_level = st.slider("Risk Level (1 = Low, 10 = High)", min_value=1, max_value=10, value=5)
+monthly_contribution = st.slider("Monthly Contribution (€)", min_value=0, max_value=1000, value=200)
 
-# Calculate Savings
-savings = income - expenses
-st.subheader(f"Your Monthly Savings: €{savings}")
+# Simulate Portfolio Growth Based on Input
+simulated_growth = df_portfolio["Portfolio Value (€)"].copy()
+for i in range(1, len(simulated_growth)):
+    # Apply simulated growth based on risk and monthly contribution
+    growth_factor = 1 + (risk_level / 1000)
+    simulated_growth[i] = simulated_growth[i-1] * growth_factor + monthly_contribution
 
-# Display Financial Tips
-st.write("### Financial Tips:")
+# Plot Simulated Growth
+st.write("### Simulated Portfolio Growth (Based on Risk and Contributions)")
+fig2, ax2 = plt.subplots()
+ax2.plot(df_portfolio["Month"], simulated_growth, marker='x', color='#FF77B9')
+ax2.set_title("Simulated Portfolio Growth", fontsize=14, color='white')
+ax2.set_xlabel("Month", fontsize=12, color='white')
+ax2.set_ylabel("Portfolio Value (€)", fontsize=12, color='white')
+ax2.tick_params(axis='x', labelcolor='white')
+ax2.tick_params(axis='y', labelcolor='white')
+st.pyplot(fig2)
+
+# Progress Tracker Section
+st.write("### Progress Tracker")
 st.write("""
-- **Track Your Spending**: Make sure to track where your money is going to help make better spending decisions.
-- **Start Budgeting**: Create a monthly budget to help allocate funds toward savings.
-- **Emergency Fund**: Aim to save 3–6 months of living expenses for emergencies.
-- **Invest for the Future**: Consider long-term investments like stocks or retirement accounts.
+Track your financial progress and set your financial goals. Stay motivated by measuring your growth!
 """)
+goal_value = st.slider("Set Your Investment Goal (€)", min_value=1000, max_value=10000, value=5000)
+progress = (current_portfolio_value / goal_value) * 100
+
+# Display Progress Bar
+st.write(f"Your current progress towards your goal: {progress:.2f}%")
+st.progress(progress)
+
+# Market News Section
+st.write("### Market News")
+st.write("""
+Stay informed with the latest market trends. Here's a glimpse of what's happening in the financial world:
+""")
+# Example market news (static data for now)
+market_news = [
+    "Stock Market Hits Record Highs Amid Economic Recovery.",
+    "Women Investors Outperform Male Counterparts in Long-Term Investments.",
+    "Cryptocurrency: A Growing Trend Among Millennial Investors.",
+    "Sustainable Investments: How Women are Leading the Green Revolution."
+]
+
+for news_item in market_news:
+    st.write(f"- {news_item}")
+
+# Educational Content Section
+st.write("### Educational Content")
+st.write("""
+Learn about different investment options and strategies to grow your wealth. Here are some resources:
+""")
+st.write("""
+- **Investing Basics**: Learn the fundamentals of investing, such as stocks, bonds, and ETFs.
+- **Risk Management**: Understand how to assess risk and make educated investment choices.
+- **Investment Strategies for Beginners**: Step-by-step guides to start your investment journey with confidence.
+- **Long-Term Growth vs Short-Term Gains**: What you need to know about time horizons and market volatility.
+""")
+
+# Footer
+st.write("### Empowering Women to Take Control of Their Financial Future")
 
 # Chart: Savings Progress Over Time
 st.write("### Savings Progress Chart")
