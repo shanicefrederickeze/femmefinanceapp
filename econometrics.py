@@ -36,17 +36,6 @@ portfolio_data = {
 
 df_portfolio = pd.DataFrame(portfolio_data)
 
-# Plot Portfolio Progress
-st.write("### Portfolio Progress")
-fig, ax = plt.subplots()
-ax.plot(df_portfolio["Month"], df_portfolio["Portfolio Value (€)"], marker='o', color='white')
-ax.set_title("Portfolio Growth Over Time", fontsize=14, color='white')
-ax.set_xlabel("Month", fontsize=12, color='white')
-ax.set_ylabel("Portfolio Value (€)", fontsize=12, color='white')
-ax.tick_params(axis='x', labelcolor='white')
-ax.tick_params(axis='y', labelcolor='white')
-st.pyplot(fig)
-
 # Portfolio Amount Display
 current_portfolio_value = df_portfolio["Portfolio Value (€)"].iloc[-1]
 st.subheader(f"Current Portfolio Value: €{current_portfolio_value}")
